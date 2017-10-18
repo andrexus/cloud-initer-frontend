@@ -1,0 +1,24 @@
+<div class="pull-right">
+  <button (click)="create()" class="btn btn-primary">New instance</button>
+</div>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>IP address</th>
+    <th>MAC address</th>
+    <th>Date updated</th>
+  </tr>
+  </thead>
+  <tr *ngFor="let instance of instances; let number=index" (click)="gotoDetail(instance)">
+    <td>{{ number + 1 }}</td>
+    <td>{{ instance.name }}</td>
+    <td>{{ instance.ipAddress }}</td>
+    <td>{{ instance.macAddress }}</td>
+    <td>
+      {{ instance.updatedAt | date:'d.M.y' }}
+      <span class="label label-info">{{ instance.updatedAt | date:'HH:mm:ss' }}</span>
+    </td>
+  </tr>
+</table>
