@@ -5,6 +5,6 @@ export class Instance {
   macAddress: string;
   metaData: string;
   userData: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

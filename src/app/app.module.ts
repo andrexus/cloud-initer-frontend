@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { InstanceModule } from './instance/instance.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [

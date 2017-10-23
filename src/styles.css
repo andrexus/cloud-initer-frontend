@@ -1,0 +1,9 @@
+codemirror .CodeMirror {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  height: 55vh;
+}
+
+codemirror.codemirror-small .CodeMirror {
+  height: 100px;
+}

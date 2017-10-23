@@ -1,48 +1,49 @@
-<div *ngIf="instance">
+<div *ngIf="form">
   <div class="page-header">
-    <h3>{{instance.name}}</h3>
-    <h3 *ngIf="!instance.name">no name</h3>
+    <h3>{{form.value.name}}</h3>
+    <h3 *ngIf="!form.value.name">no name</h3>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <a class="btn btn-default" (click)="goBack()" style="margin-right: 5px;">
-        <i class="glyphicon glyphicon-chevron-left"></i>
-        Back
-      </a>
-      <div class="pull-right form-group">
-        <button *ngIf="instance.id" (click)="deleteInstance(instance)" class="btn btn-danger">Delete</button>
-        <button (click)="saveInstance()" class="btn btn-primary">Save</button>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+      <div class="col-sm-12">
+        <a class="btn btn-default" (click)="goBack()" style="margin-right: 5px;">
+          <i class="glyphicon glyphicon-chevron-left"></i>
+          Back
+        </a>
+        <div class="pull-right form-group">
+          <button *ngIf="instance.id" (click)="deleteInstance(instance)" class="btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
       </div>
     </div>
-  </div>
 
-
-  <div class="row">
-    <div class="form-group col-sm-4">
-      <label>name: </label>
-      <input class="form-control" [(ngModel)]="instance.name" placeholder="instance name"/>
-    </div>
-    <div class="form-group col-sm-4">
-      <label>IP address: </label>
-      <input class="form-control" [(ngModel)]="instance.ipAddress" placeholder="10.1.0.123"/>
-    </div>
-    <div class="form-group col-sm-4">
-      <label>MAC address: </label>
-      <div class="input-group">
-        <input class="form-control" [(ngModel)]="instance.macAddress" placeholder="8E:85:9D:89:E4:2F"/>
-        <span class="input-group-btn">
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label>name: </label>
+        <input class="form-control" formControlName="name" placeholder="instance name"/>
+      </div>
+      <div class="form-group col-sm-4">
+        <label>IP address: </label>
+        <input class="form-control" formControlName="ipAddress" placeholder="10.1.0.123"/>
+      </div>
+      <div class="form-group col-sm-4">
+        <label>MAC address: </label>
+        <div class="input-group">
+          <input class="form-control" formControlName="macAddress" placeholder="8E:85:9D:89:E4:2F"/>
+          <span class="input-group-btn">
               <button class="btn btn-default" type="button" (click)="generateMACAddress()">Generate</button>
             </span>
+        </div>
+      </div>
+
+      <div class="form-group col-sm-12">
+        <label>user-data: </label>
+        <codemirror [config]="config" formControlName="userData"></codemirror>
+      </div>
+      <div class="form-group col-sm-12">
+        <label>meta-data: </label>
+        <codemirror [config]="config" formControlName="metaData"></codemirror>
       </div>
     </div>
-
-    <div class="form-group col-sm-12">
-      <label>user-data: </label>
-      <textarea class="form-control" rows="30" [(ngModel)]="instance.userData"></textarea>
-    </div>
-    <div class="form-group col-sm-12">
-      <label>meta-data: </label>
-      <textarea class="form-control" rows="30" [(ngModel)]="instance.metaData"></textarea>
-    </div>
-  </div>
+  </form>
 </div>
