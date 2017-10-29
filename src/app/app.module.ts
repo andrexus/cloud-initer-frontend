@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { InstanceModule } from './instance/instance.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { EnvironmentModule } from './environment-module/environment.module';
 
 @NgModule({
   imports: [
@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     HttpModule,
     InstanceModule,
+    EnvironmentModule
   ],
   declarations: [
     AppComponent,

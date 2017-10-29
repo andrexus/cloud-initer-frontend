@@ -4,6 +4,7 @@ import { InstanceService } from '../instance.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { APIResponse } from '../../dto/apiResponse';
 
 
 @Component({
@@ -14,8 +15,12 @@ import { Observable } from 'rxjs/Observable';
 export class InstanceDetailComponent implements OnInit {
 
   form: FormGroup;
+
   private macAddressControl: FormControl;
-  config = {mode: 'yaml', lineNumbers: true, tabSize: 2};
+
+  codeMirrorConfig = {mode: 'yaml', lineNumbers: true, tabSize: 2};
+
+  apiResponse: APIResponse;
 
   constructor(private instanceService: InstanceService,
               private route: ActivatedRoute,
@@ -24,7 +29,7 @@ export class InstanceDetailComponent implements OnInit {
 
   private createForm(instance: Instance) {
     this.form = new FormGroup({
-      id:  new FormControl(instance.id),
+      id: new FormControl(instance.id),
       name: new FormControl(instance.name),
       ipAddress: new FormControl(instance.ipAddress),
       macAddress: this.macAddressControl = new FormControl(instance.macAddress),
@@ -45,8 +50,10 @@ export class InstanceDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    const onSaved = this.instance.id ? this.instanceService.update(this.instance) : this.instanceService.create(this.instance);
-    onSaved.subscribe(() => this.goBack());
+    const onSaved = this.instance.id ? this.instanceService.updateItem(this.instance) : this.instanceService.createItem(this.instance);
+    onSaved.subscribe(() => this.goBack(), (error) => {
+      this.apiResponse = <APIResponse>error.json();
+    });
   }
 
   goBack(): void {
@@ -54,7 +61,7 @@ export class InstanceDetailComponent implements OnInit {
   }
 
   deleteInstance(instance: Instance): void {
-    this.instanceService.delete(instance.id).subscribe(() => this.goBack());
+    this.instanceService.deleteItem(instance.id).subscribe(() => this.goBack());
   }
 
   generateMACAddress(): void {

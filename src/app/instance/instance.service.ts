@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Instance } from './instance';
+import { Preview } from './preview';
 
 
 @Injectable()
@@ -19,27 +20,31 @@ export class InstanceService {
 
   getInstance(id: string) {
     const url = `${this.instancesUrl}/${id}`;
-
     return this.http.get(url).map(response => <Instance>response.json());
   }
 
-  delete(id: string) {
+  deleteItem(id: string) {
     const url = `${this.instancesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers}).map(() => null);
   }
 
-  create(instance: Instance) {
+  createItem(instance: Instance) {
     const url = `${this.instancesUrl}`;
     return this.http
       .post(url, JSON.stringify(instance), {headers: this.headers})
       .map(() => instance);
   }
 
-  update(instance: Instance) {
+  updateItem(instance: Instance) {
     const url = `${this.instancesUrl}/${instance.id}`;
     return this.http
       .put(url, JSON.stringify(instance), {headers: this.headers})
       .map(() => instance);
+  }
+
+  getPreview(id: string) {
+    const url = `${this.instancesUrl}/${id}/preview`;
+    return this.http.get(url).map(response => <Preview>response.json());
   }
 
 }
