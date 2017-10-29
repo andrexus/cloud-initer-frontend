@@ -1,0 +1,37 @@
+<div *ngIf="form">
+  <div class="page-header">
+    <h3>Environment</h3>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+      <div class="col-sm-12">
+        <a class="btn btn-default" (click)="goBack()" style="margin-right: 5px;">
+          <i class="glyphicon glyphicon-chevron-left"></i>
+          Back
+        </a>
+        <div class="pull-right form-group">
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="apiResponse" class="row">
+      <div class="col-sm-12">
+        <div *ngFor="let error of apiResponse.errors">
+          <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{ error.message }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-12">
+        <label>config: </label>
+        <codemirror [config]="codeMirrorConfig" formControlName="config"></codemirror>
+      </div>
+    </div>
+  </form>
+</div>
