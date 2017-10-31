@@ -9,6 +9,7 @@
     <th>IP address</th>
     <th>MAC address</th>
     <th>Date updated</th>
+    <th>Last requested</th>
   </tr>
   </thead>
   <tr *ngFor="let instance of instances; let number=index" (click)="gotoDetail(instance)">
@@ -19,6 +20,16 @@
     <td>
       {{ instance.updatedAt | date:'d.M.y' }}
       <span class="label label-info">{{ instance.updatedAt | date:'HH:mm:ss' }}</span>
+    </td>
+    <td>
+      <div *ngIf="instance.requestedBy">
+        {{ instance.requestedAt | date:'d.M.y' }}
+        <span class="label label-info">{{ instance.requestedAt | date:'HH:mm:ss' }}</span><br>
+        <span class="label label-warning">{{ instance.requestedBy | slice:0:24 }}</span>
+      </div>
+      <div *ngIf="!instance.requestedBy">
+        <span class="label label-warning">never requested</span>
+      </div>
     </td>
   </tr>
 </table>

@@ -4,7 +4,7 @@ import { InstanceService } from '../instance.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { APIResponse } from '../../dto/apiResponse';
+import { APIResponse } from '../../dto/api-response.dto';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class InstanceDetailComponent implements OnInit {
   codeMirrorConfig = {mode: 'yaml', lineNumbers: true, tabSize: 2};
 
   apiResponse: APIResponse;
+
+  isPreview = false;
 
   constructor(private instanceService: InstanceService,
               private route: ActivatedRoute,
@@ -50,10 +52,10 @@ export class InstanceDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    const onSaved = this.instance.id ? this.instanceService.updateItem(this.instance) : this.instanceService.createItem(this.instance);
-    onSaved.subscribe(() => this.goBack(), (error) => {
-      this.apiResponse = <APIResponse>error.json();
-    });
+    this.instanceService.saveItem(this.instance).subscribe(
+      () => this.goBack(),
+      (error) => this.apiResponse = <APIResponse>error.json()
+    );
   }
 
   goBack(): void {

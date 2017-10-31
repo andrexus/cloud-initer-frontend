@@ -1,10 +1,10 @@
-<div *ngIf="preview">
+<div *ngIf="cloudInitData" class="row">
   <div class="form-group col-sm-12">
     <label>user-data: </label>
-    <textarea class="form-control" rows="20">{{ preview.userData }}</textarea>
+    <codemirror *ngIf="previewUserDataFormControl" [config]="codeMirrorConfig" [formControl]="previewUserDataFormControl"></codemirror>
   </div>
   <div class="form-group col-sm-12">
     <label>meta-data: </label>
-    <textarea class="form-control" rows="10">{{ preview.metaData }}</textarea>
+    <codemirror *ngIf="previewMetaDataFormControl" [config]="codeMirrorConfig" [formControl]="previewMetaDataFormControl"></codemirror>
   </div>
 </div>

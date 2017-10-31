@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Instance } from './instance';
-import { Preview } from './preview';
 
 
 @Injectable()
@@ -42,9 +41,8 @@ export class InstanceService {
       .map(() => instance);
   }
 
-  getPreview(id: string) {
-    const url = `${this.instancesUrl}/${id}/preview`;
-    return this.http.get(url).map(response => <Preview>response.json());
+  saveItem(instance: Instance) {
+    return instance.id ? this.updateItem(instance) : this.createItem(instance);
   }
 
 }

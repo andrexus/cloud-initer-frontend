@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { InstanceService } from '../instance.service';
-import { Instance } from '../instance';
-import { Preview } from '../preview';
+import { FormControl } from '@angular/forms';
+import { CloudInitData } from '../../dto/cloud-init-data.dto';
+import { CloudInitService } from '../cloud-init.service';
 
 @Component({
   selector: 'app-preview',
@@ -10,17 +10,30 @@ import { Preview } from '../preview';
 })
 export class PreviewComponent implements OnInit {
 
-  @Input() instance: Instance;
-  preview: Preview;
+  @Input() userData: string;
+  @Input() metaData: string;
 
-  codeMirrorConfig = {mode: 'yaml', lineNumbers: true, tabSize: 2};
+  cloudInitData: CloudInitData;
 
-  constructor(private instanceService: InstanceService) {
+  previewUserDataFormControl: FormControl;
+  previewMetaDataFormControl: FormControl;
+
+  codeMirrorConfig = {mode: 'yaml', lineNumbers: true, tabSize: 2, readOnly: 'nocursor' };
+
+  constructor(private cloudInitService: CloudInitService) {
   }
 
   ngOnInit() {
-    this.instanceService.getPreview(this.instance.id)
-      .subscribe(preview => this.preview = preview);
+    const requestData = {
+      userData: this.userData,
+      metaData: this.metaData,
+    };
+    this.cloudInitService.generatePreview(requestData)
+      .subscribe(data => {
+        this.cloudInitData = data;
+        this.previewUserDataFormControl = new FormControl(this.cloudInitData.userData);
+        this.previewMetaDataFormControl = new FormControl(this.cloudInitData.metaData);
+      });
   }
 
 }

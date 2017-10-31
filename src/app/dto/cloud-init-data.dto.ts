@@ -1,4 +1,4 @@
-export class Preview {
+export class CloudInitData {
   metaData: string;
   userData: string;
 }

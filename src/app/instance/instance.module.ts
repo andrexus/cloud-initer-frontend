@@ -5,8 +5,9 @@ import { InstanceDetailComponent } from './instance-detail/instance-detail.compo
 import { InstancesListComponent } from './instances-list/instances-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CodemirrorModule } from '../codemirror-module/codemirror.module';
+import { CodemirrorModule } from '../codemirror/codemirror.module';
 import { PreviewComponent } from './preview/preview.component';
+import { CloudInitService } from './cloud-init.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,6 @@ import { PreviewComponent } from './preview/preview.component';
     InstanceDetailComponent,
     PreviewComponent,
   ],
-  providers: [ InstanceService ],
+  providers: [ InstanceService, CloudInitService ],
 })
 export class InstanceModule { }

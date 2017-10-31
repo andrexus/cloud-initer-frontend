@@ -7,4 +7,6 @@ export class Instance {
   userData: string;
   createdAt?: string;
   updatedAt?: string;
+  requestedAt?: string;
+  requestedBy?: string;
 }

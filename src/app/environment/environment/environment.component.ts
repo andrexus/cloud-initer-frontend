@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { APIResponse } from '../../dto/apiResponse';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EnvironmentService } from '../environment.service';
 import { Environment } from '../environment';
+import { APIResponse } from '../../dto/api-response.dto';
 
 @Component({
   selector: 'app-environment',
