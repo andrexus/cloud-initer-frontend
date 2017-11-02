@@ -1,20 +1,17 @@
 <div *ngIf="form">
-  <div class="page-header">
-    <h3>{{form.value.name}}</h3>
-    <h3 *ngIf="!form.value.name">no name</h3>
+  <div class="row form-group">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button class="btn btn-default" [class.btn-primary]="!isPreview" (click)="isPreview = false">Edit</button>
+        <button class="btn btn-default" [class.btn-primary]="isPreview" (click)="isPreview = true">Preview</button>
+      </div>
+    </div>
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
     <div class="row">
       <div class="col-sm-12">
-        <a class="btn btn-default" (click)="goBack()" style="margin-right: 5px;">
-          <i class="glyphicon glyphicon-chevron-left"></i>
-          Back
-        </a>
+        <a class="btn btn-default" (click)="goBack()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
         <div class="pull-right form-group">
-          <div class="btn-group">
-            <button class="btn btn-default" [class.btn-primary]="!isPreview" (click)="isPreview = false">Edit</button>
-            <button class="btn btn-default" [class.btn-primary]="isPreview" (click)="isPreview = true">Preview</button>
-          </div>
           <button *ngIf="instance.id" (click)="deleteInstance(instance)" class="btn btn-danger">Delete</button>
           <button type="submit" class="btn btn-success">Save</button>
         </div>
@@ -52,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div [hidden]="isPreview">
+    <div *ngIf="!isPreview">
       <div class="row">
         <div class="form-group col-sm-12">
           <label>user-data: </label>
@@ -66,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div [hidden]="isPreview">
+    <div *ngIf="isPreview">
       <app-preview [userData]="form.get('userData').value" [metaData]="form.get('metaData').value"></app-preview>
     </div>
 
