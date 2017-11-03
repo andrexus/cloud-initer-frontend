@@ -51,19 +51,19 @@ export class InstanceDetailComponent implements OnInit {
     return this.form.value;
   }
 
-  onSubmit() {
+  saveInstance() {
     this.instanceService.saveItem(this.instance).subscribe(
       () => this.goBack(),
       (error) => this.apiResponse = <APIResponse>error.json()
     );
   }
 
-  goBack(): void {
-    this.router.navigate(['..'], {relativeTo: this.route});
-  }
-
   deleteInstance(instance: Instance): void {
     this.instanceService.deleteItem(instance.id).subscribe(() => this.goBack());
+  }
+
+  goBack(): void {
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 
   generateMACAddress(): void {

@@ -1,19 +1,16 @@
 <div *ngIf="form">
-  <div class="row form-group">
-    <div class="col-sm-12">
-      <div class="btn-group pull-right">
-        <button class="btn btn-default" [class.btn-primary]="!isPreview" (click)="isPreview = false">Edit</button>
-        <button class="btn btn-default" [class.btn-primary]="isPreview" (click)="isPreview = true">Preview</button>
-      </div>
-    </div>
-  </div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div [formGroup]="form">
+
     <div class="row">
       <div class="col-sm-12">
         <a class="btn btn-default" (click)="goBack()"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
         <div class="pull-right form-group">
+          <div class="btn-group">
+            <button class="btn btn-default" [class.btn-primary]="!isPreview" (click)="isPreview = false">Edit</button>
+            <button class="btn btn-default" [class.btn-primary]="isPreview" (click)="isPreview = true">Preview</button>
+          </div>
           <button *ngIf="instance.id" (click)="deleteInstance(instance)" class="btn btn-danger">Delete</button>
-          <button type="submit" class="btn btn-success">Save</button>
+          <button type="submit" class="btn btn-success" (click)="saveInstance()">Save</button>
         </div>
       </div>
     </div>
@@ -67,5 +64,5 @@
       <app-preview [userData]="form.get('userData').value" [metaData]="form.get('metaData').value"></app-preview>
     </div>
 
-  </form>
+  </div>
 </div>
