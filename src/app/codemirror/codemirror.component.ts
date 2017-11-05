@@ -2,7 +2,6 @@ import { Component, Input, ViewChild, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 require('codemirror/mode/yaml/yaml');
-require('codemirror/mode/javascript/javascript');
 
 let CodeMirror = require('codemirror');
 

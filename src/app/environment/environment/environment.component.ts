@@ -14,7 +14,7 @@ export class EnvironmentComponent implements OnInit {
 
   form: FormGroup;
 
-  codeMirrorConfig = {mode: {name: 'javascript', json: true}, lineNumbers: true, tabSize: 2};
+  codeMirrorConfig = {mode: 'yaml', lineNumbers: true, tabSize: 2};
 
   apiResponse: APIResponse;
 
